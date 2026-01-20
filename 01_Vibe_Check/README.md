@@ -45,9 +45,9 @@ You will be required to submit a link to your GitHub, as well as screenshots of 
 Please evaluate your system on the following questions:
 
 1. Explain the concept of object-oriented programming in simple terms to a complete beginner.
-    - Aspect Tested:
+    - Aspect Tested: 
 2. Read the following paragraph and provide a concise summary of the key points…
-    - Aspect Tested:
+    - Aspect Tested: 
 3. Write a short, imaginative story (100–150 words) about a robot finding friendship in an unexpected place.
     - Aspect Tested:
 4. If a store sells apples in packs of 4 and oranges in packs of 3, how many packs of each do I need to buy to get exactly 12 apples and 9 oranges?
@@ -59,6 +59,8 @@ Please evaluate your system on the following questions:
 
 Do the answers appear to be correct and useful?
 ##### ✅ Answer:
+Checked all the aspects given above. Overall, the answers appear to be correct and useful. The system explained concepts clearly, summarized text accurately, showed creativity in storytelling, solved the logical problem correctly, and rewrote the text in a more professional tone. The responses were understandable and followed the instructions given in each prompt.
+
 
 ---
 
@@ -73,18 +75,18 @@ Now test your assistant with personal questions it should be able to help with. 
 - "What can I cook with [enter ingredients] in fridge."
 
 ##### Your Prompts and Results:
-1. Prompt:
-   - Result:
-2. Prompt:
-   - Result:
-3. Prompt:
-   - Result:
+1. Prompt: Help me think through the pros and cons of changing my job this year.
+   - Result: The assistant provided a balanced list of emotional, financial, and career growth factors to consider before making the decision.
+2. Prompt:  Draft a polite follow-up email to my manager who has not replied to my last message.
+   - Result: The assistant generated a polite and professional follow-up message suitable for workplace communication.
+3. Prompt: I am feeling stressed and overwhelmed today. What should I do?
+   - Result: The assistant responded empathetically, suggested simple coping techniques, and encouraged self-care.
 
 #### ❓Question #2:
 
 Are the vibes of this assistant's answers aligned with your vibes? Why or why not?
 ##### ✅ Answer:
-
+Yes, the vibes of the assistant’s answers are well aligned with my expectations. The responses are calm, supportive, and empathetic, which matches the intended role of a supportive mental coach. The assistant avoids being judgmental and provides encouraging, practical guidance, which is appropriate for personal and emotional support.
 ---
 
 #### 🏗️ Activity #3: Personal Vibe Checking Evals (Requires Additional Capabilities)
@@ -95,16 +97,16 @@ Now test your assistant with questions that would require capabilities beyond ba
 - "What time should I leave for the airport?"
 
 ##### Your Prompts and Results:
-1. Prompt:
-   - Result:
-2. Prompt:
-   - Result:
+1. Prompt: What does my schedule look like tomorrow?
+   - Result: The assistant explained that it does not have access to my personal calendar or schedule and cannot retrieve this information.
+2. Prompt: What time should I leave for the airport?
+   - Result: The assistant explained that it does not have access to real-time traffic data or my location, so it cannot give an accurate recommendation.
 
 #### ❓Question #3:
 
 What are some limitations of your application?
 ##### ✅ Answer:
-
+Some limitations of my application are that it does not have access to real-time data such as traffic, schedules, or weather. It cannot access personal information like emails, calendars, or files. It also provides general guidance and should not replace professional medical or mental health advice. The quality of responses depends on how clearly the user asks their question.
 ---
 
 This "vibe check" now serves as a baseline, of sorts, to help understand what holes your application has.
