@@ -5,7 +5,8 @@
   "python_version": "3.13",
   "graphs": {
     "simple_agent": "app.graphs.simple_agent:graph",
-    "agent_with_helpfulness": "app.graphs.agent_with_helpfulness:graph"
+    "agent_with_helpfulness": "app.graphs.agent_with_helpfulness:graph",
+    "agent_with_clarity": "app.graphs.clarity_agent:graph"
   },
   "assistants": {
     "agent": {
@@ -17,7 +18,11 @@
       "graph_id": "agent_with_helpfulness",
       "name": "Agent with Helpfulness Check",
       "description": "Agent that uses tools and performs a helpfulness check with loop limit."
+    },
+    "agent_clarity": {
+      "graph_id": "agent_with_clarity",
+      "name": "Agent with Clarity Check",
+      "description": "Agent that uses tools and performs a clarity check to ensure responses are simple and jargon-free."
     }
   }
 }
-

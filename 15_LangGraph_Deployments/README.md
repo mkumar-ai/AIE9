@@ -69,21 +69,36 @@ Have fun!
 What is the key architectural difference between the `simple_agent` and `agent_with_helpfulness` graphs? Specifically, explain how the helpfulness evaluation loop works and what mechanisms are in place to prevent it from running indefinitely.
 
 ##### Answer:
-
+- The simple_agent is pretty straightforward — the agent gets a question, decides if it needs to use a tool, uses it if needed, and then just... stops. Done. No second-guessing itself.
+- The agent_with_helpfulness adds an extra "wait, was that actually a good answer?" step. After the agent responds, instead of immediately ending, it routes to a helpfulness node that asks a separate (slightly smarter) model — GPT-4.1-mini — to judge whether the response was truly helpful. If the judge says "yes", the graph ends. If it says "no", the graph loops back and makes the agent try again.
+- To stop this from running forever, there's a simple but effective loop guard: if the message history grows beyond 10 messages, the helpfulness node just forces a HELPFULNESS:END signal and the graph exits regardless. So the maximum number of retry attempts is capped automatically.
+In short — simple_agent is "answer and exit", while agent_with_helpfulness is "answer, get graded, retry if needed, but never more than a few times."
 
 
 #### Question 2:
 What is the role of `langgraph.json` in the LangGraph Deployments? Describe each of its key fields and how the platform uses this file to discover and serve your graphs.
 
 ##### Answer:
+langgraph.json works as the front door sign for your project — it's the first thing LangGraph reads when you run langgraph dev. Without it, the platform has no idea your graphs exist.
+Here's what each field does in this project:
+- version — Just tells the platform which format of this config file to expect. Think of it like a file format version. Currently 1.
+- dependencies — Tells the platform where to find your Python code. The ["."] means "look in this current folder". This is how it finds your app/ package.
+- env — Points to your .env file so the platform automatically loads your API keys (OpenAI, Tavily, etc.) when it starts up.
+- python_version — Specifies which Python version to use. Here it's 3.13.
+- graphs — This is the most important part. It's a map of name → file path:variable. For example "simple_agent": "app.graphs.simple_agent:graph" tells the platform "go find the compiled graph object inside app/graphs/simple_agent.py and register it under the name simple_agent."
+- assistants — These are basically instances of your graphs. One graph can have multiple assistants with different names or descriptions. 
 
+So the whole flow is: platform reads langgraph.json → finds your graph files → loads the compiled graph objects → exposes them as API endpoints under the assistant names you defined.
 
 
 #### Activity #1:
 Create your own agent graph! Build a new graph in `app/graphs/` with a custom evaluation node (e.g., a vibe checker, a fact verifier, a summarizer — get creative!). Register it in `langgraph.json`, serve it with `uv run langgraph dev`
 
 ##### Answer:
-
+Built a Clarity Checker agent in app/graphs/clarity_agent.py. The idea was simple — after the agent answers a question, instead of just ending, it routes to a clarity node that asks a smarter model (gpt-4.1-mini) to judge whether the response is clear and jargon-free enough for a non-technical person to understand.
+If the clarity check comes back CLARITY:Y → the graph ends. If it's CLARITY:N → it loops back to the agent to try again with a better response. To make sure it doesn't loop forever and burn through API credits, there's a hard limit — if messages exceed 10, it forces a CLARITY:END and exits no matter what.
+Registered it in langgraph.json as agent_with_clarity and tested it in LangGraph Studio with the question "What is a black hole?". The agent used the retrieve_information tool, came back with a clear answer, and the clarity node returned CLARITY:Y on the first try — so it exited cleanly without needing to retry.
+The graph structure in Studio showed exactly 4 nodes: agent → action → clarity → __end__ which matched the code perfectly.
 
 
 # Ship 🚢
